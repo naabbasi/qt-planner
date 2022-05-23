@@ -2,20 +2,23 @@ package com.qterminals.qtplanner;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Screen;
 
 public class PlannerController {
     @FXML
     private Canvas canvas;
     private GraphicsContext graphicsContext;
-    private double lastX ;
-    private double lastY ;
+    private double startX;
+    private double startY;
+
+    private double lastX;
+    private double lastY;
+
+    private double newX;
+    private double newY;
 
     public void initialize() {
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
@@ -27,6 +30,11 @@ public class PlannerController {
         canvas.setOnMousePressed(e -> {
             lastX = e.getX();
             lastY = e.getY();
+
+            startX = e.getX();
+            startY = e.getY();
+
+            graphicsContext.clearRect(startX, startY, newX, newY);
         });
 
         canvas.setOnMouseDragged(e->{
@@ -34,32 +42,20 @@ public class PlannerController {
             double x = e.getX();
             double y = e.getY();
 
+            newX = e.getX();
+            newY = e.getY();
+
             graphicsContext.setLineWidth(size);
-            graphicsContext.setStroke(Color.RED);
-            graphicsContext.strokeLine(lastX, lastY, x, y);
-            lastX = x ;
-            lastY = y ;
+            graphicsContext.setStroke(Color.LIMEGREEN);
+            lastX = x;
+            lastY = y;
+
+            //graphicsContext.fillRect(lastX, lastY, 10, 10);
+            System.out.println("X: " + lastX + " Y: " + lastY + " X: " + x + " Y: " + y);
         });
-    }
 
-    private Canvas getCanvas(Group group) {
-
-        // Creating canvas object for add an image
-        Canvas canvasRef = new Canvas(750, 500);
-        group.getChildren().add(canvasRef);
-
-        // adding 2d graphics to the canvas object
-        GraphicsContext graphicContext = canvasRef.getGraphicsContext2D();
-
-        // adding color to the graphic
-        graphicContext.setFill(Color.BLUE);
-        graphicContext.setStroke(Color.BROWN);
-        graphicContext.setLineWidth(3);
-
-        Font theFont = Font.font("Castellar", FontWeight.BOLD, 38);
-        graphicContext.setFont(theFont);
-        graphicContext.fillText("This is Text Area for Canvas", 61, 52);
-
-        return canvasRef;
+        canvas.setOnMouseReleased(e -> {
+            graphicsContext.fillRect(startX, startY, newX, newY);
+        });
     }
 }

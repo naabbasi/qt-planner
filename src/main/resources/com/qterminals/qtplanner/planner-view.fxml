@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.Group?>
-<?import javafx.scene.layout.VBox?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.qterminals.qtplanner.PlannerController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
-
-    <Group>
-        <Canvas fx:id="canvas" style="-fx-background-color: black;" width="100" height="100">
-        </Canvas>
-    </Group>
-</VBox>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.qterminals.qtplanner.PlannerController">
+    <children>
+        <Group>
+            <children>
+                <Canvas fx:id="canvas">
+                </Canvas>
+            </children>
+        </Group>
+    </children>
+</AnchorPane>

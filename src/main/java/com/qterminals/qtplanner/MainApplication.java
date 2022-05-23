@@ -17,6 +17,7 @@ public class MainApplication extends Application {
 
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("planner-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), screenBounds.getWidth(), screenBounds.getHeight() - 50);
+        //scene.setFill(Color.BLACK);
         stage.setTitle("Planner");
         stage.setScene(scene);
         stage.show();
